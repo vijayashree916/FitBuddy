@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitBuddy – Your Plan</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+</head>
+<body>
+  <main class="page-shell wide">
+    <div class="topbar">
+      <a href="/">← New plan</a>
+      <a href="/admin-login">Admin</a>
+    </div>
+
+    <section class="card">
+      <div class="badge">{{ "Updated plan" if is_updated else "Personalized plan" }}</div>
+      <h1>{{ user.username }}'s 7-Day Plan</h1>
+      <div class="profile">
+        <span><strong>Goal:</strong> {{ user.goal }}</span>
+        <span><strong>Intensity:</strong> {{ user.intensity }}</span>
+        <span><strong>Weight:</strong> {{ user.weight }} kg</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🏋️ Workout Plan</h2>
+      <pre class="plan">{{ display_plan }}</pre>
+    </section>
+
+    <section class="card tip">
+      <h2>🥗 Nutrition / Recovery Tip</h2>
+      <p>{{ plan.nutrition_tip }}</p>
+    </section>
+
+    <section class="card">
+      <h2>🔄 Refine Your Plan</h2>
+      <p>Tell FitBuddy what you would like to change, such as “add more cardio” or “include an extra rest day.”</p>
+      <form method="post" action="/submit-feedback">
+        <input type="hidden" name="user_id" value="{{ user.user_id }}">
+        <textarea name="feedback" required maxlength="1000" placeholder="What would you like to change?"></textarea>
+        <button class="primary" type="submit">Update Plan with Gemini →</button>
+      </form>
+    </section>
+
+    <footer>
+      <small>Plan ID: {{ plan.id }} · User ID: {{ user.user_id }}</small>
+    </footer>
+  </main>
+</body>
+</html>
