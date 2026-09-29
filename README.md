@@ -39,9 +39,13 @@ JSON APIs:
 
 ## Setup
 
+The runnable project is in `project-phases/05-project-development/`. Run the setup and
+application commands from that directory.
+
 ### Windows PowerShell
 
 ```powershell
+cd project-phases/05-project-development
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
@@ -64,6 +68,7 @@ Open:
 ### Windows CMD
 
 ```cmd
+cd project-phases\05-project-development
 python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
@@ -74,6 +79,7 @@ uvicorn app.main:app --reload
 ### macOS / Linux
 
 ```bash
+cd project-phases/05-project-development
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
@@ -86,7 +92,8 @@ uvicorn app.main:app --reload
 The test suite uses a fake Gemini layer, so it does not require a real API call.
 
 ```bash
-pytest -q
+cd project-phases/05-project-development
+python -m pytest -q
 ```
 
 For a live Gemini test, configure `.env`, start the server, submit the form, and verify
